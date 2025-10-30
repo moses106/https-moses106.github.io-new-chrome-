@@ -1,2 +1,2 @@
-# https-moses106.github.io-new-chrome-
+# https-moses106.google.com
 call.me.moses_IT

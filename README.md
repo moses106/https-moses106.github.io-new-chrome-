@@ -1,2 +1,2 @@
-# https-moses106.google.com
+ https://moses106.com
 call.me.moses_IT

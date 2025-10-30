@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<!-- saved from url=(0072)file:///C:/Users/Moses/Desktop/my%20moses develop/like%20chrome.html%20mmm3.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>call.me.moses_IT</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(45deg, #1a1a2e, #16213e, #0f3460);
+            color: white;
+            min-height: 100vh;
+        }
+
+        /* Background Images */
+        .bg-images {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.1;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="20" height="30" x="10" y="35" fill="%23ff6b6b" rx="2"/><rect width="20" height="30" x="40" y="35" fill="%234ecdc4" rx="2"/><rect width="20" height="30" x="70" y="35" fill="%23ffe66d" rx="2"/><circle cx="20" cy="20" r="5" fill="%23ff6b6b"/><circle cx="50" cy="20" r="5" fill="%234ecdc4"/><circle cx="80" cy="20" r="5" fill="%23ffe66d"/></svg>') repeat;
+        }
+
+        /* Page Styles */
+        .page {
+            display: none;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* Welcome Page */
+        .welcome-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+        }
+
+       .welcome-title {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #ffe66d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 10px rgba(255, 107, 107, 0.5)); }
+            to { filter: drop-shadow(0 0 20px rgba(78, 205, 196, 0.8)); }
+        }
+
+        .welcome-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 40px;
+            color: #ccc;
+        }
+
+        .continue-btn {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            color: white;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .continue-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 107, 107, 0.3);
+        }
+
+        /* Main Page */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .auth-btn {
+            padding: 10px 20px;
+            border: 2px solid #4ecdc4;
+            background: transparent;
+            color: #4ecdc4;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .auth-btn:hover {
+            background: #4ecdc4;
+            color: #1a1a2e;
+        }
+
+        .options-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .option-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .option-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .option-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .option-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #4ecdc4;
+        }
+
+        .option-description {
+            color: #ccc;
+            margin-bottom: 20px;
+        }
+
+        .option-link {
+            display: inline-block;
+            padding: 12px 25px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: transform 0.3s;
+        }
+
+        .option-link:hover {
+            transform: scale(1.05);
+        }
+
+        /* Auth Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+        }
+
+        .modal.active {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: rgba(26, 26, 46, 0.95);
+            padding: 40px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 400px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .modal-title {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.8rem;
+            color: #4ecdc4;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #ccc;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1rem;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #4ecdc4;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+
+        .close-modal {
+            background: transparent;
+            border: 1px solid #ccc;
+            color: #ccc;
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .footer {
+            background: rgba(0, 0, 0, 0.8);
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 50px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: #4ecdc4;
+        }
+
+        .footer-text {
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .welcome-title {
+                font-size: 2.5rem;
+            }
+            
+            .header {
+                padding: 15px 20px;
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .options-container {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+            
+            .modal-content {
+                margin: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-images"></div>
+
+    <!-- Welcome Page -->
+    <div id="welcomePage" class="page">
+        <div class="welcome-container">
+            <h1 class="welcome-title">CALL.ME.MOSES_IT</h1>
+            <p class="welcome-subtitle">Your Welcome to call.me.moses_IT</p>
+            <button class="continue-btn" onclick="showMainPage()">Continue and Enjoy</button>
+        </div>
+    </div>
+
+    <!-- Main Page -->
+    <div id="mainPage" class="page active">
+        <header class="header">
+            <div class="logo">CALL.ME.MOSES_IT</div>
+            <div class="auth-buttons">
+                <button class="auth-btn" onclick="showSignIn()">Sign In</button>
+                <button class="auth-btn" onclick="showSignUp()">Sign Up</button>
+            </div>
+        </header>
+
+        <div class="options-container">
+            <div class="option-card">
+                <div class="option-icon">🎬</div>
+                <h3 class="option-title">Films</h3>
+                <p class="option-description">Watch the latest movies and classic films</p>
+                <a href="https://moviebox.com/" class="option-link" target="_blank">Explore Films</a>
+            </div>
+
+            <div class="option-card">
+                <div class="option-icon">📹</div>
+                <h3 class="option-title">Videos</h3>
+                <p class="option-description">Discover amazing video content</p>
+                <a href="https://youtube.com/" class="option-link" target="_blank">Watch Videos</a>
+            </div>
+
+            <div class="option-card">
+                <div class="option-icon">🎵</div>
+                <h3 class="option-title">Music</h3>
+                <p class="option-description">Listen to your favorite songs </p>
+                <a href="https://spotify.com/" class="option-link" target="_blank">Spotify</a>
+                <a href="https://audiomack.com/" class="option-link" target="_blank" style="margin-left: 10px;">Audiomack</a>
+            </div>
+
+            <div class="option-card">
+                <div class="option-icon">📚</div>
+                <h3 class="option-title">Stories &amp; Novels </h3>
+                <p class="option-description">Read captivating stories and novels</p>
+                <a href="https://notepad.com/" class="option-link" target="_blank">Notepad</a>
+                <a href="https://joyread.com/" class="option-link" target="_blank" style="margin-left: 10px;">JoyRead</a>
+            </div>
+
+            <div class="option-card">
+                <div class="option-icon">🎭</div>
+                <h3 class="option-title">Agasobanuye</h3>
+                <p class="option-description">Enjoy Agasobanuye content </p>
+                <a href="https://agasobanuyenow.com/" class="option-link" target="_blank">Agasobanuye Now</a>
+                <a href="https://oshakurufilms.com/" class="option-link" target="_blank" style="margin-left: 10px;">Oshakuru Films</a>
+            </div>
+
+            <div class="option-card">
+                <div class="option-icon">⚡</div>
+                <h3 class="option-title">Shorts</h3>
+                <p class="option-description">Quick entertaining short videos</p>
+                <a href="https://tiktok.com/" class="option-link" target="_blank">TikTok</a>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="footer-content">
+                <h4 class="footer-title">Generated by dushimimanamoses24@gmail.com</h4>
+                <p class="footer-text">© 2025 call.me.moses_IT. All rights reserved. Platform designed and developed with passion for entertainment.</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Sign In Modal -->
+    <div id="signInModal" class="modal">
+        <div class="modal-content">
+            <h3 class="modal-title">Sign In</h3>
+            <form onsubmit="handleSignIn(event)">
+                <div class="form-group">
+                    <label>Email:</label>
+                    <input type="email" required="">
+                </div>
+                <div class="form-group">
+                    <label>Password:</label>
+                    <input type="password" required="">
+                </div>
+                <button type="submit" class="submit-btn">Sign In</button>
+                <button type="button" class="close-modal" onclick="closeModal()">Close</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Sign Up Modal -->
+    <div id="signUpModal" class="modal">
+        <div class="modal-content">
+            <h3 class="modal-title">Sign Up</h3>
+            <form onsubmit="handleSignUp(event)">
+                <div class="form-group">
+                    <label>Full Name:</label>
+                    <input type="text" required="">
+                </div>
+                <div class="form-group">
+                    <label>Email:</label>
+                    <input type="email" required="">
+                </div>
+                <div class="form-group">
+                    <label>Password:</label>
+                    <input type="password" required="">
+                </div>
+                <div class="form-group">
+                    <label>Confirm Password:</label>
+                    <input type="password" required="">
+                </div>
+                <button type="submit" class="submit-btn">Sign Up</button>
+                <button type="button" class="close-modal" onclick="closeModal()">Close</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Simple user database simulation
+        let users = [];
+
+        function showMainPage() {
+            document.getElementById('welcomePage').classList.remove('active');
+            document.getElementById('mainPage').classList.add('active');
+        }
+
+        function showSignIn() {
+            document.getElementById('signInModal').classList.add('active');
+        }
+
+        function showSignUp() {
+            document.getElementById('signUpModal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('signInModal').classList.remove('active');
+            document.getElementById('signUpModal').classList.remove('active');
+        }
+
+        function handleSignIn(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const email = formData.get('email') || event.target.querySelector('input[type="email"]').value;
+            const password = formData.get('password') || event.target.querySelector('input[type="password"]').value;
+            
+            // Simple validation (in real app, this would be server-side)
+            const user = users.find(u => u.email === email && u.password === password);
+            
+            if (user) {
+                alert('Welcome back, ' + user.name + '!');
+                closeModal();
+            } else {
+                alert('Invalid credentials. Please try again or sign up.');
+            }
+        }
+
+        function handleSignUp(event) {
+            event.preventDefault();
+            const inputs = event.target.querySelectorAll('input');
+            const name = inputs[0].value;
+            const email = inputs[1].value;
+            const password = inputs[2].value;
+            const confirmPassword = inputs[3].value;
+            
+            if (password !== confirmPassword) {
+                alert('Passwords do not match!');
+                return;
+            }
+            
+            if (users.find(u => u.email === email)) {
+                alert('Email already exists!');
+                return;
+            }
+            
+            // Add user to database
+            users.push({ name, email, password });
+            alert('Account created successfully! You can now sign in.');
+            closeModal();
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const signInModal = document.getElementById('signInModal');
+            const signUpModal = document.getElementById('signUpModal');
+            
+            if (event.target === signInModal) {
+                closeModal();
+            }
+            if (event.target === signUpModal) {
+                closeModal();
+            }
+        }
+    </script>
+
+</body></html>
